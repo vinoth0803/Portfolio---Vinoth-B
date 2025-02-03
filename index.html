@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinoth B - Portfolio</title>
+    <link rel="shortcut icon" href="image-removebg-preview (1).png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <!-- Raleway Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        @keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.animate-scroll {
+    animation: scroll 30s linear infinite;
+}
+
+/* Add this if you want the scroll to pause on hover */
+.animate-scroll:hover {
+    animation-play-state: paused;
+}
+        * {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        :root {
+            --primary-yellow: #f4ce14;
+            --primary-gray: #45474b;
+            --light-bg: #f5f7f8;
+        }
+
+        .hero-bg {
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 100% 50%, rgba(255, 255, 255, 0.8), transparent);
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+            font-weight:500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            
+            height: 2px;
+            background: var(--primary-yellow);
+            left: 0;
+            bottom: -2px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile menu animations */
+        .mobile-link {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            font-weight:500;
+        }
+
+        .mobile-menu-active .mobile-link {
+            transform: translateX(0);
+        }
+
+        .mobile-link:hover {
+            background-color: rgba(244, 206, 20, 0.1);
+        }
+
+        /* Button hover effects */
+        .btn-primary {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .profile-img {
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            
+        }
+    </style>
+</head>
+<body class="bg-light-bg">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4 px-4">
+                <a href="#" class="text-2xl font-bold text-[#45474b]">VB</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Home</a>
+                    <a href="#" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">About</a>
+                    <a href="#" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Projects</a>
+                    <a href="contact.html" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Contact</a>
+                </div>
+                <button class="md:hidden text-[#45474b]" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+                <a href="#" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14]  transition-all duration-300">Home</a>
+                <a href="#" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">About</a>
+                <a href="#" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Projects</a>
+                <a href="contact.html" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-4">
+            <div class="content-wrapper grid md:grid-cols-2 gap-8 items-center">
+                <!-- Left Column - Image -->
+                <div class="flex justify-center animate-fade-in">
+                    <img src="VINOTH_BALASUBRAMANIAN-removebg-preview.png" alt="Vinoth B" class="profile-img">
+                </div>
+                <!-- Right Column - Content -->
+                <div class="flex flex-col space-y-6 animate-fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold text-[--primary-gray]">Hi, I'm Vinoth</h1>
+                    <div class="text-xl md:text-2xl text-[#45474b]">
+                         <span id="typed-text"></span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="Vinoth Resume ATS.pdf" target="_blank" 
+                           class="btn-primary bg-[#f4ce14] text-[#45474b] px-6 py-3 rounded-lg font-semibold text-center hover:bg-[#f4ce14]/90">
+                            Download CV
+                        </a>
+                        <a href="contact.html" 
+                           class="btn-primary bg-[#45474b] text-white px-6 py-3 rounded-lg font-semibold text-center hover:bg-[#45474b]/90">
+                            Let's Work Together
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scrolling Text Section -->
+<section class="bg-[#45474b] py-8 overflow-hidden ">
+    <div class="animate-scroll flex whitespace-nowrap ">
+        <div class="flex space-x-20">
+            <p class="text-gray-300 text-xl">"One of the only ways to get out of a tight box is to invent your way out." – Jeff Bezos</p>
+            <p class="text-gray-300 text-xl">"Don't let the noise of others' opinions drown out your own inner voice." - Steve Jobs</p>
+            <p class="text-gray-300 text-xl">"The key to artificial intelligence has always been the representation." —Jeff Hawkins</p>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <!-- Left Column - Image -->
+            <div class="animate-fade-in">
+                <img src="10798281_19362653.jpg" alt="Web Developer" class="rounded-2xl  w-full max-w-md mx-auto">
+            </div>
+            
+            <!-- Right Column - Content -->
+            <div class="space-y-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#45474b] relative inline-block group">
+                    About
+                    <span class="absolute bottom-0 left-0 w-0 h-1 bg-[#f4ce14] transition-all duration-300 group-hover:w-full"></span>
+                </h2>
+                <p class="text-gray-600 leading-relaxed">
+                    I am Vinoth B, an MCA student at SRM University with a strong foundation in Python, JavaScript, PHP, and Java. I have hands-on experience developing secure and scalable web applications, including an e-commerce platform built with Flask and Firebase. My leadership roles as President of the Student Council and International Service Director at Rotaract Club have sharpened my teamwork and problem-solving skills. I also leverage AI tools to automate tasks and enhance my workflow in web development, design, and video editing. I'm passionate about using technology to drive innovation and efficiency.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-20 bg-[#45474b]">
+    <div class="container mx-auto px-4">
+        <div class="text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white relative inline-block group mb-12">
+                Skills
+                <span class="absolute bottom-0 left-0 w-0 h-1 bg-[#f4ce14] transition-all duration-300 group-hover:w-full"></span>
+            </h2>
+        </div>
+        
+        
+        <!-- First Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 ">
+            
+            
+            <!-- Skill Card 1 -->
+            <div class="group relative animate-fade-in">
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <img src="/skills/pngwing.com.png" alt="CSS" class="w-20 h-20 mx-auto">
+                    <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                        <p class="text-[#45474b] font-semibold">Tail Wind CSS</p>
+                        <p class="text-gray-600 text-sm">Frontend Styling Framework</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Card 2 -->
+            <div class="group relative animate-fade-in">
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <img src="/skills/js.png" alt="JavaScript" class="w-20 h-20 mx-auto">
+                    <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                        <p class="text-[#45474b] font-semibold">JavaScript</p>
+                        <p class="text-gray-600 text-sm">Frontend Programming Language</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Card 3 -->
+            <div class="group relative animate-fade-in">
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <img src="/skills/java.png" alt="React" class="w-20 h-20 mx-auto">
+                    <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                        <p class="text-[#45474b] font-semibold">Java</p>
+                        <p class="text-gray-600 text-sm">Backend Programming Language</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Skill Card 4 -->
+            <div class="group relative animate-fade-in">
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <img src="/skills/python.png" alt="Node.js" class="w-20 h-20 mx-auto">
+                    <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                        <p class="text-[#45474b] font-semibold">Python</p>
+                        <p class="text-gray-600 text-sm">Backend Programming Language</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <!-- Skill Card 5 -->
+            <div class="group relative animate-fade-in">
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <img src="/skills/firebase.png" alt="Python" class="w-20 h-20 mx-auto">
+                    <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                        <p class="text-[#45474b] font-semibold">Firebase</p>
+                        <p class="text-gray-600 text-sm">Backend-as-a-Service</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Card 6 -->
+            <div class="group relative animate-fade-in">
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <img src="/skills/mysql.png" alt="MySQL" class="w-20 h-20 mx-auto">
+                    <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                        <p class="text-[#45474b] font-semibold">MySQL</p>
+                        <p class="text-gray-600 text-sm">Database Management System</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Card 7 -->
+            <div class="group relative animate-fade-in">
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <img src="/skills/github.png" alt="Git" class="w-20 h-20 mx-auto">
+                    <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                        <p class="text-[#45474b] font-semibold">Git</p>
+                        <p class="text-gray-600 text-sm">Version Control System</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Skill Card 8 -->
+            <div class="group relative animate-fade-in">
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                    <img src="/skills/photoshop.png" alt="HTML" class="w-20 h-20 mx-auto">
+                    <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                        <p class="text-[#45474b] font-semibold">Photoshop</p>
+                        <p class="text-gray-600 text-sm">Graphic Design Software</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('mobile-menu-active');
+            
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            mobileLinks.forEach((link, index) => {
+                setTimeout(() => {
+                    link.style.transform = mobileMenu.classList.contains('mobile-menu-active') ? 
+                        'translateX(0)' : 'translateX(-100%)';
+                }, index * 100);
+            });
+        }
+
+        // Typing Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            new Typed('#typed-text', {
+                strings: ['Web Developer', 'Graphic Designer', 'Full Stack Developer'],
+                typeSpeed: 50,
+                backSpeed: 30,
+                backDelay: 2000,
+                loop: true
+            });
+        });
+    </script>
+</body>
+</html>
