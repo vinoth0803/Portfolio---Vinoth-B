@@ -17,12 +17,20 @@
     }
     .animate-bounce { animation: bounce 1.5s infinite; }
     
+    /* Scrolling Animation for Skills */
     @keyframes scroll {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
     }
     .animate-scroll { animation: scroll 30s linear infinite; }
     .animate-scroll:hover { animation-play-state: paused; }
+    
+    @keyframes scrollReverse {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(50%); }
+    }
+    .animate-scroll-reverse { animation: scrollReverse 30s linear infinite; }
+    .animate-scroll-reverse:hover { animation-play-state: paused; }
     
     * { font-family: 'Raleway', sans-serif; }
     
@@ -36,6 +44,7 @@
       background: white;
       position: relative;
       overflow: hidden;
+      cursor: default;
     }
     .hero-bg::before {
       content: '';
@@ -95,7 +104,7 @@
       border-radius: 0.5rem;
       transition: background-color 0.3s ease;
     }
-    .edu-exp-card:hover { background-color: #ffffe0; }
+    
     
     /* Tab styles for Education & Experience */
     .tab-button {
@@ -121,19 +130,63 @@
       transform: translateX(10px);
       color: var(--primary-yellow);
     }
+    
+    /* Smoke Cursor Animation */
+    .smoke-cursor {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(100,100,100,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1; /* reduced so it stays behind hero images */
+      animation: smoke 1.2s ease-out forwards;
+    }
+    @keyframes smoke {
+      from { transform: scale(1) rotate(0deg); opacity: 0.7; }
+      to { transform: scale(2.5) rotate(360deg); opacity: 0; }
+    }
+    
+    /* Carousel Styles for Projects Section */
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+    .project-card {
+      flex: 0 0 auto;
+      background: #fff;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-right: 1rem;
+      width: 300px;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+    .project-card img { border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem; }
+    .project-card .p-4 { padding: 1rem; }
   </style>
 </head>
 <body class="bg-light-bg">
   <!-- Navbar -->
   <nav class="fixed w-full z-50 bg-white shadow-md">
     <div class="container mx-auto px-4">
-      <div class="flex justify-between items-center py-4 px-4">
-        <a href="#" class="text-2xl font-bold text-[#45474b]">VB</a>
+      <div class="flex justify-between items-center py-4">
+        <a href="#home" class="text-2xl font-bold text-[#45474b]">VB</a>
         <div class="hidden md:flex space-x-8">
-          <a href="#" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Home</a>
-          <a href="#" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Services</a>
-          <a href="#" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Projects</a>
-          <a href="contact.html" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Contact</a>
+          <a href="#home" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Home</a>
+          <a href="#about" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">About</a>
+          <a href="#skills" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Skills</a>
+          <a href="#projects" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Projects</a>
+          <a href="#eduExp" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Academics</a>
+          <a href="#contact" class="nav-link text-[#45474b] hover:text-[#f4ce14] transition-colors">Contact</a>
         </div>
         <button class="md:hidden text-[#45474b]" onclick="toggleMobileMenu()">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,16 +197,18 @@
       </div>
       <!-- Mobile Menu -->
       <div id="mobileMenu" class="hidden md:hidden pb-4">
-        <a href="#" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Home</a>
-        <a href="#" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Services</a>
-        <a href="#" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Projects</a>
-        <a href="contact.html" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Contact</a>
+        <a href="#home" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Home</a>
+        <a href="#about" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">About</a>
+        <a href="#skills" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Skills</a>
+        <a href="#projects" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Projects</a>
+        <a href="#eduExp" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Academics</a>
+        <a href="#contact" class="mobile-link block py-2 px-4 text-[#45474b] hover:text-[#f4ce14] transition-all duration-300">Contact</a>
       </div>
     </div>
   </nav>
   
   <!-- Hero Section -->
-  <section class="hero-bg min-h-screen flex items-center pt-16">
+  <section id="home" class="hero-bg min-h-screen flex items-center pt-16 relative" onmousemove="createSmoke(event)">
     <div class="container mx-auto px-4">
       <div class="content-wrapper grid md:grid-cols-2 gap-8 items-center">
         <!-- Left Column - Image -->
@@ -171,7 +226,7 @@
                class="btn-primary bg-[#f4ce14] text-[#45474b] px-6 py-3 rounded-lg font-semibold text-center hover:bg-[#f4ce14]/90">
               Download CV
             </a>
-            <a href="contact.html"
+            <a href="#contact"
                class="btn-primary bg-[#45474b] text-white px-6 py-3 rounded-lg font-semibold text-center hover:bg-[#45474b]/90">
               Let's Work Together
             </a>
@@ -193,7 +248,7 @@
   </section>
   
   <!-- About Section -->
-  <section class="py-20 bg-white">
+  <section id="about" class="py-20 bg-white">
     <div class="container mx-auto px-4">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <!-- Left Column - Image -->
@@ -220,7 +275,7 @@
   </section>
   
   <!-- Skills Section -->
-  <section class="py-20 bg-[#45474b]">
+  <section id="skills" class="py-20 bg-[#45474b]">
     <div class="container mx-auto px-4">
       <div class="text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-white relative inline-block group mb-12">
@@ -228,88 +283,182 @@
           <span class="absolute bottom-0 left-0 w-0 h-1 bg-[#f4ce14] transition-all duration-300 group-hover:w-full"></span>
         </h2>
       </div>
-      <!-- First Row -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-        <!-- Skill Card 1 -->
-        <div class="group relative animate-fade-in">
-          <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-            <img src="/skills/pngwing.com.png" alt="Tail Wind CSS" class="w-20 h-20 mx-auto" />
-            <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-              <p class="text-[#45474b] font-semibold">Tail Wind CSS</p>
-              <p class="text-gray-600 text-sm">Frontend Styling Framework</p>
+      <!-- First Row (scrolling from right to left with duplicate for seamless scroll) -->
+      <div class="overflow-hidden mb-12">
+        <div class="flex w-[200%] animate-scroll">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 w-1/2">
+            <!-- Skill Card 1 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/pngwing.com.png" alt="Tail Wind CSS" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Tail Wind CSS</p>
+                  <p class="text-gray-600 text-sm">Frontend Styling Framework</p>
+                </div>
+              </div>
+            </div>
+            <!-- Skill Card 2 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/js.png" alt="JavaScript" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">JavaScript</p>
+                  <p class="text-gray-600 text-sm">Frontend Programming Language</p>
+                </div>
+              </div>
+            </div>
+            <!-- Skill Card 3 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/java.png" alt="Java" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Java</p>
+                  <p class="text-gray-600 text-sm">Backend Programming Language</p>
+                </div>
+              </div>
+            </div>
+            <!-- Skill Card 4 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/python.png" alt="Python" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Python</p>
+                  <p class="text-gray-600 text-sm">Backend Programming Language</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- Skill Card 2 -->
-        <div class="group relative animate-fade-in">
-          <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-            <img src="/skills/js.png" alt="JavaScript" class="w-20 h-20 mx-auto" />
-            <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-              <p class="text-[#45474b] font-semibold">JavaScript</p>
-              <p class="text-gray-600 text-sm">Frontend Programming Language</p>
+          <!-- Duplicate of first row for seamless scrolling -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 w-1/2">
+            <!-- Duplicate Skill Card 1 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/pngwing.com.png" alt="Tail Wind CSS" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Tail Wind CSS</p>
+                  <p class="text-gray-600 text-sm">Frontend Styling Framework</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <!-- Skill Card 3 -->
-        <div class="group relative animate-fade-in">
-          <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-            <img src="/skills/java.png" alt="Java" class="w-20 h-20 mx-auto" />
-            <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-              <p class="text-[#45474b] font-semibold">Java</p>
-              <p class="text-gray-600 text-sm">Backend Programming Language</p>
+            <!-- Duplicate Skill Card 2 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/js.png" alt="JavaScript" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">JavaScript</p>
+                  <p class="text-gray-600 text-sm">Frontend Programming Language</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <!-- Skill Card 4 -->
-        <div class="group relative animate-fade-in">
-          <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-            <img src="/skills/python.png" alt="Python" class="w-20 h-20 mx-auto" />
-            <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-              <p class="text-[#45474b] font-semibold">Python</p>
-              <p class="text-gray-600 text-sm">Backend Programming Language</p>
+            <!-- Duplicate Skill Card 3 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/java.png" alt="Java" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Java</p>
+                  <p class="text-gray-600 text-sm">Backend Programming Language</p>
+                </div>
+              </div>
+            </div>
+            <!-- Duplicate Skill Card 4 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/python.png" alt="Python" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Python</p>
+                  <p class="text-gray-600 text-sm">Backend Programming Language</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Second Row -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        <!-- Skill Card 5 -->
-        <div class="group relative animate-fade-in">
-          <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-            <img src="/skills/firebase.png" alt="Firebase" class="w-20 h-20 mx-auto" />
-            <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-              <p class="text-[#45474b] font-semibold">Firebase</p>
-              <p class="text-gray-600 text-sm">Backend-as-a-Service</p>
+      <!-- Second Row (scrolling from left to right with duplicate for seamless scroll) -->
+      <div class="overflow-hidden">
+        <div class="flex w-[200%] animate-scroll-reverse">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 w-1/2">
+            <!-- Skill Card 5 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/firebase.png" alt="Firebase" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Firebase</p>
+                  <p class="text-gray-600 text-sm">Backend-as-a-Service</p>
+                </div>
+              </div>
+            </div>
+            <!-- Skill Card 6 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/mysql.png" alt="MySQL" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">MySQL</p>
+                  <p class="text-gray-600 text-sm">Database Management System</p>
+                </div>
+              </div>
+            </div>
+            <!-- Skill Card 7 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/github.png" alt="Git" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Git</p>
+                  <p class="text-gray-600 text-sm">Version Control System</p>
+                </div>
+              </div>
+            </div>
+            <!-- Skill Card 8 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/photoshop.png" alt="Photoshop" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Photoshop</p>
+                  <p class="text-gray-600 text-sm">Graphic Design Software</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- Skill Card 6 -->
-        <div class="group relative animate-fade-in">
-          <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-            <img src="/skills/mysql.png" alt="MySQL" class="w-20 h-20 mx-auto" />
-            <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-              <p class="text-[#45474b] font-semibold">MySQL</p>
-              <p class="text-gray-600 text-sm">Database Management System</p>
+          <!-- Duplicate of second row -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 w-1/2">
+            <!-- Duplicate Skill Card 5 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/firebase.png" alt="Firebase" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Firebase</p>
+                  <p class="text-gray-600 text-sm">Backend-as-a-Service</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <!-- Skill Card 7 -->
-        <div class="group relative animate-fade-in">
-          <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-            <img src="/skills/github.png" alt="Git" class="w-20 h-20 mx-auto" />
-            <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-              <p class="text-[#45474b] font-semibold">Git</p>
-              <p class="text-gray-600 text-sm">Version Control System</p>
+            <!-- Duplicate Skill Card 6 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/mysql.png" alt="MySQL" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">MySQL</p>
+                  <p class="text-gray-600 text-sm">Database Management System</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <!-- Skill Card 8 -->
-        <div class="group relative animate-fade-in">
-          <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-            <img src="/skills/photoshop.png" alt="Photoshop" class="w-20 h-20 mx-auto" />
-            <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-              <p class="text-[#45474b] font-semibold">Photoshop</p>
-              <p class="text-gray-600 text-sm">Graphic Design Software</p>
+            <!-- Duplicate Skill Card 7 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/github.png" alt="Git" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Git</p>
+                  <p class="text-gray-600 text-sm">Version Control System</p>
+                </div>
+              </div>
+            </div>
+            <!-- Duplicate Skill Card 8 -->
+            <div class="group relative animate-fade-in">
+              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
+                <img src="/skills/photoshop.png" alt="Photoshop" class="w-20 h-20 mx-auto" />
+                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
+                  <p class="text-[#45474b] font-semibold">Photoshop</p>
+                  <p class="text-gray-600 text-sm">Graphic Design Software</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -317,17 +466,170 @@
     </div>
   </section>
   
-  <!-- Education and Experience Section -->
-  <section class="py-20 bg-white">
+  
+<!-- Projects Section -->
+<section id="projects" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#45474b] relative inline-block group">
+        Projects
+        <span class="absolute bottom-0 left-0 w-0 h-1 bg-[#f4ce14] transition-all duration-300 group-hover:w-full"></span>
+      </h2>
+    </div>
+    
+    <!-- Carousel Wrapper -->
+    <div class="relative overflow-x-auto whitespace-nowrap scroll-smooth snap-x snap-mandatory scrollbar-hide">
+      <div class="flex space-x-4">
+        
+        <!-- Project Card 1 -->
+        <div class="group relative h-64 w-1/4 snap-start flex-shrink-0 [perspective:1000px]">
+          <div class="absolute duration-1000 w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)]">
+            <!-- Front Side -->
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col items-center justify-center shadow-lg [backface-visibility:hidden]">
+              <img src="/10798281_19362653.jpg" alt="Project 1" class="w-full h-28 object-contain rounded-md mb-2" />
+              <div class="text-xl font-bold text-center">Project One</div>
+            </div>
+            <!-- Back Side -->
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col justify-between shadow-lg [transform:rotateX(180deg)] [backface-visibility:hidden]">
+              <div>
+                <div class="text-lg font-bold mb-2">Project One</div>
+                <p class="text-sm break-words">A brief description of Project One.</p>
+              </div>
+              <div class="flex justify-center">
+                <a href="#" class="px-3 py-1 bg-black text-white rounded-lg text-sm hover:bg-gray-800 transition-colors">
+                  View Project
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project Card 2 -->
+        <div class="group relative h-64 w-1/4 snap-start flex-shrink-0 [perspective:1000px]">
+          <div class="absolute duration-1000 w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)]">
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col items-center justify-center shadow-lg [backface-visibility:hidden]">
+              <img src="/Screenshot 2025-03-10 095302.png" alt="Project 2" class="w-full h-28 object-cover rounded-md mb-2" />
+              <div class="text-xl font-bold text-center">Township Management System <br> Townment</div>
+            </div>
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col justify-between shadow-lg [transform:rotateX(180deg)] [backface-visibility:hidden]">
+              <div>
+                <div class="text-lg font-bold mb-2">Townment</div>
+                <p class="text-sm break-words">A brief description of Project Two.</p>
+              </div>
+              <div class="flex justify-center">
+                <a href="#" class="px-3 py-1 bg-black text-white rounded-lg text-sm hover:bg-[#45474b] transition-colors">
+                  View Project
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project Card 3 -->
+        <div class="group relative h-64 w-1/4 snap-start flex-shrink-0 [perspective:1000px]">
+          <div class="absolute duration-1000 w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)]">
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col items-center justify-center shadow-lg [backface-visibility:hidden]">
+              <img src="/Screenshot 2025-03-27 160756.png" alt="Project 3" class="w-full h-28 object-cover rounded-md mb-2" />
+              <div class="text-xl font-bold text-center">Budget Tracker</div>
+            </div>
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col justify-between shadow-lg [transform:rotateX(180deg)] [backface-visibility:hidden]">
+              <div>
+                <div class="text-lg font-bold mb-2">Budgetizer</div>
+                <p class="text-sm break-words">A brief description of Project Three.</p>
+              </div>
+              <div class="flex justify-center">
+                <a href="https://vinoth0803.github.io/Budget-Tracker-App-Static/" class="px-3 py-1 bg-black text-white rounded-lg text-sm hover:bg-gray-800 transition-colors">
+                  View Project
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project Card 4 -->
+        <div class="group relative h-64 w-1/4 snap-start flex-shrink-0 [perspective:1000px]">
+          <div class="absolute duration-1000 w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)]">
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col items-center justify-center shadow-lg [backface-visibility:hidden]">
+              <img src="https://via.placeholder.com/200x120" alt="Project 4" class="w-full h-28 object-cover rounded-md mb-2" />
+              <div class="text-xl font-bold text-center">Project Four</div>
+            </div>
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col justify-between shadow-lg [transform:rotateX(180deg)] [backface-visibility:hidden]">
+              <div>
+                <div class="text-lg font-bold mb-2">Project Four</div>
+                <p class="text-sm break-words">A brief description of Project Four.</p>
+              </div>
+              <div class="flex justify-center">
+                <a href="#" class="px-3 py-1 bg-black text-white rounded-lg text-sm hover:bg-gray-800 transition-colors">
+                  View Project
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project Card 5 -->
+        <div class="group relative h-64 w-1/4 snap-start flex-shrink-0 [perspective:1000px]">
+          <div class="absolute duration-1000 w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)]">
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col items-center justify-center shadow-lg [backface-visibility:hidden]">
+              <img src="https://via.placeholder.com/200x120" alt="Project 5" class="w-full h-28 object-cover rounded-md mb-2" />
+              <div class="text-xl font-bold text-center">Project Five</div>
+            </div>
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col justify-between shadow-lg [transform:rotateX(180deg)] [backface-visibility:hidden]">
+              <div>
+                <div class="text-lg font-bold mb-2">Project Five</div>
+                <p class="text-sm break-words">A brief description of Project Five.</p>
+              </div>
+              <div class="flex justify-center">
+                <a href="#" class="px-3 py-1 bg-black text-white rounded-lg text-sm hover:bg-gray-800 transition-colors">
+                  View Project
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project Card 6 -->
+        <div class="group relative h-64 w-1/4 snap-start flex-shrink-0 [perspective:1000px]">
+          <div class="absolute duration-1000 w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateX(180deg)]">
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col items-center justify-center shadow-lg [backface-visibility:hidden]">
+              <img src="https://via.placeholder.com/200x120" alt="Project 6" class="w-full h-28 object-cover rounded-md mb-2" />
+              <div class="text-xl font-bold text-center">Project Six</div>
+            </div>
+            <div class="absolute w-full h-full rounded-xl bg-white p-4 text-black flex flex-col justify-between shadow-lg [transform:rotateX(180deg)] [backface-visibility:hidden]">
+              <div>
+                <div class="text-lg font-bold mb-2">Project Six</div>
+                <p class="text-sm break-words">A brief description of Project Six.</p>
+              </div>
+              <div class="flex justify-center">
+                <a href="#" class="px-3 py-1 bg-black text-white rounded-lg text-sm hover:bg-gray-800 transition-colors">
+                  View Project
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  
+  <!-- Education & Experience Section (Academics link points here) -->
+  <section id="eduExp" class="py-20 bg-[#45474b]">
     <div class="container mx-auto px-4">
       <!-- Section Heading -->
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#45474b] animate-fade-in">Education & Experience</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white animate-fade-in">Education & Experience
+          <span class="absolute bottom-0 left-0 w-0 h-1 bg-[#f4ce14] transition-all duration-300 group-hover:w-full"></span>
+        </h2>
       </div>
       <!-- Tab Navigation -->
       <div class="flex border-b border-gray-200 mb-8">
-        <div id="eduTab" class="tab-button active" onclick="toggleTab('edu')">Education</div>
-        <div id="expTab" class="tab-button" onclick="toggleTab('exp')">Experience</div>
+        <div id="eduTab" class="tab-button text-white active" onclick="toggleTab('edu')">Education</div>
+        <div id="expTab" class="tab-button text-white" onclick="toggleTab('exp')">Experience</div>
       </div>
       <!-- Tab Contents -->
       <div id="eduContent" class="tab-content active">
@@ -399,6 +701,20 @@
     </div>
   </section>
   
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-[#f5f7f8]">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#45474b] relative inline-block group">
+          Contact
+          <span class="absolute bottom-0 left-0 w-0 h-1 bg-[#f4ce14] transition-all duration-300 group-hover:w-full"></span>
+        </h2>
+      </div>
+      <p class="text-center text-gray-600">Feel free to reach out for collaborations or inquiries.</p>
+      <!-- (Optional: You can add a contact form here) -->
+    </div>
+  </section>
+  
   <!-- Quick Links Section -->
   <section class="py-20 bg-[#45474b] text-white ">
     <div class="container mx-auto px-4">
@@ -408,10 +724,12 @@
         <div class="animate-fade-in">
           <h3 class="text-xl font-semibold mb-4">Pages</h3>
           <ul class="space-y-4">
-            <li><a href="#" class="quick-link-item text-[#45474b] hover:text-[#f4ce14] text-white transition-colors">Home</a></li>
-            <li><a href="#" class="quick-link-item text-[#45474b] hover:text-[#f4ce14] text-white transition-colors">Services</a></li>
-            <li><a href="#" class="quick-link-item text-[#45474b] hover:text-[#f4ce14] text-white transition-colors">Project</a></li>
-            <li><a href="contact.html" class="quick-link-item text-[#45474b] hover:text-[#f4ce14] text-white transition-colors">Contact</a></li>
+            <li><a href="#home" class="quick-link-item text-[#45474b] hover:text-[#f4ce14] text-white transition-colors">Home</a></li>
+            <li><a href="#about" class="quick-link-item text-[#45474b] hover:text-[#f4ce14] text-white transition-colors">About</a></li>
+            <li><a href="#skills" class="quick-link-item text-[#45474b] hover:text-[#f4ce14] text-white transition-colors">Skills</a></li>
+            <li><a href="#projects" class="quick-link-item text-[#45474b] hover:text-[#f4ce14] text-white transition-colors">Projects</a></li>
+            <li><a href="#eduExp" class="quick-link-item text-[#45474b] hover:text-[#f4ce14] text-white transition-colors">Academics</a></li>
+            <li><a href="#contact" class="quick-link-item text-[#45474b] hover:text-[#f4ce14] text-white transition-colors">Contact</a></li>
           </ul>
         </div>
         <!-- Social Media Column -->
@@ -519,6 +837,16 @@
     
     // Dynamic Year Update for Footer
     document.getElementById("year").textContent = new Date().getFullYear();
+    
+    // Smoke Cursor Animation in Hero Section
+    function createSmoke(e) {
+      const smoke = document.createElement('div');
+      smoke.classList.add('smoke-cursor');
+      smoke.style.left = (e.clientX - 10) + 'px';
+      smoke.style.top = (e.clientY - 10) + 'px';
+      document.querySelector('.hero-bg').appendChild(smoke);
+      setTimeout(() => { smoke.remove(); }, 1200);
+    }
   </script>
 </body>
 </html>
