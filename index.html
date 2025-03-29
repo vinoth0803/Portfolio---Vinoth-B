@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,7 +41,7 @@
     }
     
     .hero-bg {
-      background: white;
+      background: #FFFAFA;
       position: relative;
       overflow: hidden;
       cursor: default;
@@ -50,7 +50,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at 100% 50%, rgba(255,255,255,0.8), transparent);
+      background-color: #F5F5F5;
       z-index: 1;
     }
     .content-wrapper { position: relative; z-index: 2; }
@@ -176,7 +176,7 @@
 </head>
 <body class="bg-light-bg">
 <!-- Navbar -->
-<nav id="navbar" class="fixed w-full z-50 bg-white">
+<nav id="navbar" class="fixed w-full z-50 bg-[#F5F5F5]">
   <div class="container mx-auto px-4">
     <div class="flex justify-between items-center py-4">
       <a href="#home" class="text-2xl font-bold text-[#45474b]">VB</a>
@@ -277,106 +277,288 @@
   <!-- Skills Section -->
   <section id="skills" class="py-20 bg-[#45474b]">
     <div class="container mx-auto px-4">
-      <div class="text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white relative inline-block group mb-12">
+      <!-- Section Title -->
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white relative inline-block group">
           Skills
           <span class="absolute bottom-0 left-0 w-0 h-1 bg-[#f4ce14] transition-all duration-300 group-hover:w-full"></span>
         </h2>
       </div>
-      <!-- First Row (scrolling from right to left with duplicate for seamless scroll) -->
-      <div class="overflow-hidden mb-12">
-        <div class="flex w-[200%] ">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 w-1/2">
-            <!-- Skill Card 1 -->
-            <div class="group relative animate-fade-in">
-              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-                <img src="/skills/pngwing.com.png" alt="Tail Wind CSS" class="w-20 h-20 mx-auto" />
-                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-                  <p class="text-[#45474b] font-semibold">Tail Wind CSS</p>
-                  <p class="text-gray-600 text-sm">Frontend Styling Framework</p>
+  
+      <!-- Two-column Layout -->
+      <div class="flex flex-col md:flex-row gap-8">
+        <!-- Left Column: Skill Categories -->
+        <div class="w-full md:w-1/2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Category Card: Frontend -->
+            <div
+              data-skill="frontend"
+              class="cursor-pointer bg-white rounded-2xl p-4 text-center shadow hover:shadow-lg transition-shadow"
+              onclick="showSkills('frontend')"
+            >
+              <!-- SVG icon for Frontend (Desktop Computer) -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-[#45474b] mx-auto mb-2 ">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+              </svg>              
+              <h3 class="text-xl font-bold text-[#45474b]">Frontend</h3>
+            </div>
+          
+            <!-- Category Card: Backend -->
+            <div
+              data-skill="backend"
+              class="cursor-pointer bg-white rounded-2xl p-4 text-center shadow hover:shadow-lg transition-shadow"
+              onclick="showSkills('backend')"
+            >
+              <!-- SVG icon for Backend (Code icon) -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#45474b] mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+              </svg>
+              <h3 class="text-xl font-bold text-[#45474b]">Backend</h3>
+            </div>
+          
+            <!-- Category Card: Web Technologies -->
+            <div
+              data-skill="webtech"
+              class="cursor-pointer bg-white rounded-2xl p-4 text-center shadow hover:shadow-lg transition-shadow"
+              onclick="showSkills('webtech')"
+            >
+              <!-- SVG icon for Web Technologies (Globe icon) -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-[#45474b] mx-auto mb-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+              </svg>              
+              <h3 class="text-xl font-bold text-[#45474b]">Web Technologies</h3>
+            </div>
+          
+            <!-- Category Card: Testing & Devops -->
+            <div
+              data-skill="testing"
+              class="cursor-pointer bg-white rounded-2xl p-4 text-center shadow hover:shadow-lg transition-shadow"
+              onclick="showSkills('testing')"
+            >
+              <!-- SVG icon for Testing & Devops (Clipboard Check icon) -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-[#45474b] mx-auto mb-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+              </svg>              
+              <h3 class="text-xl font-bold text-[#45474b]">Testing & Devops</h3>
+            </div>
+          
+            <!-- Category Card: Tools -->
+            <div
+              data-skill="tools"
+              class="cursor-pointer bg-white rounded-2xl p-4 text-center shadow hover:shadow-lg transition-shadow"
+              onclick="showSkills('tools')"
+            >
+              <!-- SVG icon for Tools (Cog icon) -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-[#45474b] mx-auto mb-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
+              </svg>              
+              <h3 class="text-xl font-bold text-[#45474b]">Tools</h3>
+            </div>
+          
+            <!-- Category Card: Soft Skills -->
+            <div
+              data-skill="soft"
+              class="cursor-pointer bg-white rounded-2xl p-4 text-center shadow hover:shadow-lg transition-shadow"
+              onclick="showSkills('soft')"
+            >
+              <!-- SVG icon for Soft Skills (User icon) -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-[#45474b] mx-auto mb-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>              
+              <h3 class="text-xl font-bold text-[#45474b]">Soft Skills</h3>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Right Column: Progress Bars for Active Category -->
+        <div class="w-full md:w-1/2">
+          <!-- Outer Container for the Skill Bars with a gradient border -->
+          <!-- Using border-image for a white-to-transparent gradient border -->
+          <div class="bg-[#3c3e42] rounded-2xl p-6 shadow border border-white/20">
+            <!-- Active Category Title -->
+            <h3 id="active-category-title" class="text-2xl font-bold text-white mb-2">Frontend</h3>
+            <!-- Horizontal line below the title -->
+            <div class="w-full h-px bg-white/30 mb-6"></div>
+        
+            <div id="progress-container">
+              <!-- Frontend -->
+              <div id="frontend" class="skill-progress transition-opacity duration-500 opacity-100">
+                <div class="mb-4">
+                  <p class="text-white">Bootstrap - 75%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 75%;">75%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">React - 79%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 79%;">79%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">JavaScript - 83%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 83%;">83%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Tailwindcss - 88%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 88%;">88%</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- Skill Card 2 -->
-            <div class="group relative animate-fade-in">
-              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-                <img src="/skills/js.png" alt="JavaScript" class="w-20 h-20 mx-auto" />
-                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-                  <p class="text-[#45474b] font-semibold">JavaScript</p>
-                  <p class="text-gray-600 text-sm">Frontend Programming Language</p>
+        
+              <!-- Backend -->
+              <div id="backend" class="skill-progress transition-opacity duration-500 opacity-0 hidden">
+                <div class="mb-4">
+                  <p class="text-white">Python - 89%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 89%;">89%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Java - 82%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 82%;">82%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">PHP - 87%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 87%;">87%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Mysql - 85%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 85%;">85%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">MongoDB - 80%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 80%;">80%</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- Skill Card 3 -->
-            <div class="group relative animate-fade-in">
-              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-                <img src="/skills/java.png" alt="Java" class="w-20 h-20 mx-auto" />
-                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-                  <p class="text-[#45474b] font-semibold">Java</p>
-                  <p class="text-gray-600 text-sm">Backend Programming Language</p>
+        
+              <!-- Web Technologies -->
+              <div id="webtech" class="skill-progress transition-opacity duration-500 opacity-0 hidden">
+                <div class="mb-4">
+                  <p class="text-white">Flask - 90%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 90%;">90%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Django - 84%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 84%;">84%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Rest API - 89%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 89%;">89%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Firebase - 87%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 87%;">87%</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- Skill Card 4 -->
-            <div class="group relative animate-fade-in">
-              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-                <img src="/skills/python.png" alt="Python" class="w-20 h-20 mx-auto" />
-                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-                  <p class="text-[#45474b] font-semibold">Python</p>
-                  <p class="text-gray-600 text-sm">Backend Programming Language</p>
+        
+              <!-- Testing & Devops -->
+              <div id="testing" class="skill-progress transition-opacity duration-500 opacity-0 hidden">
+                <div class="mb-4">
+                  <p class="text-white">Manual Testing - 86%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 86%;">86%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">CI/CD - 79%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 79%;">79%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Regression Testing - 84%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 84%;">84%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Quality Assurance - 75%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 75%;">75%</div>
+                  </div>
+                </div>
+              </div>
+        
+              <!-- Tools -->
+              <div id="tools" class="skill-progress hidden transition-opacity duration-500 opacity-0">
+                <div class="mb-4">
+                  <p class="text-white">Visual Studio - 90%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 90%;">90%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">GitHub - 92%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 92%;">92%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Postman - 84%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 84%;">84%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Figma - 80%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 80%;">80%</div>
+                  </div>
+                </div>
+              </div>
+        
+              <!-- Soft Skills -->
+              <div id="soft" class="skill-progress hidden transition-opacity duration-500 opacity-0">
+                <div class="mb-4">
+                  <p class="text-white">Adaptability - 89%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 89%;">89%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Communication - 87%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 87%;">87%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Leadership - 84%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 84%;">84%</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <p class="text-white">Time Management - 87%</p>
+                  <div class="w-full bg-gray-700 rounded">
+                    <div class="bg-[#f4ce14] text-xs font-medium text-[#45474b] text-center p-1 leading-none rounded" style="width: 87%;">87%</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-         
         </div>
-      </div>
-      <!-- Second Row (scrolling from left to right with duplicate for seamless scroll) -->
-      <div class="overflow-hidden">
-        <div class="flex w-[200%] ">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-8 w-1/2">
-            <!-- Skill Card 5 -->
-            <div class="group relative animate-fade-in">
-              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-                <img src="/skills/firebase.png" alt="Firebase" class="w-20 h-20 mx-auto" />
-                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-                  <p class="text-[#45474b] font-semibold">Firebase</p>
-                  <p class="text-gray-600 text-sm">Backend-as-a-Service</p>
-                </div>
-              </div>
-            </div>
-            <!-- Skill Card 6 -->
-            <div class="group relative animate-fade-in">
-              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-                <img src="/skills/mysql.png" alt="MySQL" class="w-20 h-20 mx-auto" />
-                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-                  <p class="text-[#45474b] font-semibold">MySQL</p>
-                  <p class="text-gray-600 text-sm">Database Management System</p>
-                </div>
-              </div>
-            </div>
-            <!-- Skill Card 7 -->
-            <div class="group relative animate-fade-in">
-              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-                <img src="/skills/github.png" alt="Git" class="w-20 h-20 mx-auto" />
-                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-                  <p class="text-[#45474b] font-semibold">Git</p>
-                  <p class="text-gray-600 text-sm">Version Control System</p>
-                </div>
-              </div>
-            </div>
-            <!-- Skill Card 8 -->
-            <div class="group relative animate-fade-in">
-              <div class="bg-white p-6 rounded-lg transform transition-transform duration-300 group-hover:-translate-y-2">
-                <img src="/skills/photoshop.png" alt="Photoshop" class="w-20 h-20 mx-auto" />
-                <div class="absolute inset-0 bg-white p-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center text-center">
-                  <p class="text-[#45474b] font-semibold">Photoshop</p>
-                  <p class="text-gray-600 text-sm">Graphic Design Software</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        
+        <!-- End Right Column -->
       </div>
     </div>
   </section>
@@ -537,9 +719,12 @@
     <div class="container mx-auto px-4">
       <!-- Section Heading -->
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-white animate-fade-in">Education & Experience
+        <h2 class="relative inline-block text-3xl md:text-4xl font-bold text-white animate-fade-in group">
+          <span class="block">Education & Experience</span>
           <span class="absolute bottom-0 left-0 w-0 h-1 bg-[#f4ce14] transition-all duration-300 group-hover:w-full"></span>
         </h2>
+
+        
       </div>
       <!-- Tab Navigation -->
       <div class="flex border-b border-gray-200 mb-8">
@@ -771,6 +956,52 @@
       document.querySelector('.hero-bg').appendChild(smoke);
       setTimeout(() => { smoke.remove(); }, 1200);
     }
+
+    function showSkills(category) {
+  // Hide all skill-progress sections and reset opacity
+  document.querySelectorAll('.skill-progress').forEach(section => {
+    section.classList.add('hidden');
+    section.classList.remove('opacity-100');
+    section.classList.add('opacity-0');
+  });
+  // Remove active styling from all category cards
+  document.querySelectorAll('[data-skill]').forEach(card => {
+    card.classList.remove('ring-1', 'ring-[#f4ce14]');
+  });
+
+  // Get the active section
+  const activeSection = document.getElementById(category);
+  // Show it by removing 'hidden'
+  activeSection.classList.remove('hidden');
+
+  // Delay the fade-in effect by 200ms (adjust the delay as needed)
+  setTimeout(() => {
+    // Force reflow to ensure the transition is applied
+    void activeSection.offsetWidth;
+    activeSection.classList.remove('opacity-0');
+    activeSection.classList.add('opacity-100');
+  }, 200);
+
+  // Add highlight to the active category card
+  document.querySelector('[data-skill="'+category+'"]').classList.add('ring-1', 'ring-[#f4ce14]');
+
+  // Update the heading on the right column
+  const categoryTitleMap = {
+    'frontend': 'Frontend',
+    'backend': 'Backend',
+    'webtech': 'Web Technologies',
+    'testing': 'Testing & Devops',
+    'tools': 'Tools',
+    'soft': 'Soft Skills'
+  };
+  document.getElementById('active-category-title').textContent = categoryTitleMap[category] || 'Skills';
+}
+
+// Show "Frontend" by default on page load
+document.addEventListener('DOMContentLoaded', function() {
+  showSkills('frontend');
+});
+
   </script>
 </body>
 </html>
